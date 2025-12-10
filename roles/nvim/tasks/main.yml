@@ -26,26 +26,26 @@
 
 - name: Setup config dir
   ansible.builtin.file:
-    path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config"
+    path: "{{ ansible_env.HOME }}/.config"
     state: directory
-    owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
-    # group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    owner: "{{ ansible_env.USER }}"
+    # group: "{{ ansible_env.USER }}"
     mode: "0700"
 
 - name: Install Nvim Config
   ansible.builtin.synchronize:
     src: "nvim"
-    dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config/"
+    dest: "{{ ansible_env.HOME }}/.config/"
     mode: push
     delete: true
     archive: true
     recursive: true
-    # owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
-    # group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    # owner: "{{ ansible_env.USER }}"
+    # group: "{{ ansible_env.USER }}"
     # mode: '0755'
 # - name: Install Nvim Config
 #   ansible.posix.synchronize:
 #     src: "nvim"
-#     dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config"
+#     dest: "{{ ansible_env.HOME }}/.config"
 #     recursive: true
 #     delete: true

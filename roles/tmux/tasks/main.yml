@@ -3,7 +3,7 @@
   become: true
   ansible.builtin.apt:
     name: tmux
-    state: present
+    state: absent
 
 - name: Install tmux
   community.general.homebrew:
@@ -14,14 +14,14 @@
 - name: Install tmux package manager
   ansible.builtin.git:
     repo: "https://github.com/tmux-plugins/tpm"
-    dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.tmux/plugins/tpm"
+    dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
     update: true
     clone: true
 
 - name: Setup tmux configs
   ansible.builtin.synchronize:
     src: "tmux"
-    dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config/"
+    dest: "{{ ansible_env.HOME }}/.config/"
     mode: push
     delete: true
     archive: true
@@ -29,6 +29,6 @@
 # - name: Install tmux conf
 #   ansible.builtin.copy:
 #     src: .tmux.conf
-#     dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.tmux.conf"
-#     owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
+#     dest: "{{ ansible_env.HOME }}/.tmux.conf"
+#     owner: "{{ ansible_env.USER }}"
 #     mode: "0644"

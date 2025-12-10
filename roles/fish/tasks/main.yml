@@ -44,36 +44,36 @@
 
 - name: Setup default shell
   ansible.builtin.user:
-    name: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    name: "{{ ansible_env.USER }}"
     shell: /usr/bin/fish
 
 - name: Setup config dir
   ansible.builtin.file:
-    path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config"
+    path: "{{ ansible_env.HOME }}/.config"
     state: directory
-    owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
-    group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
     mode: '0700'
 
 - name: Install fish config
   ansible.builtin.copy:
     src: "fish"
-    dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config/"
-    owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
-    group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    dest: "{{ ansible_env.HOME }}/.config/"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
     mode: '0755'
 
 # - name: Install configs
 #   ansible.posix.synchronize:
 #     src: "fish"
-#     dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config"
+#     dest: "{{ ansible_env.HOME }}/.config"
 #     recursive: true
 #     delete: true
 
 - name: Copy hidden config
   ansible.builtin.template:
     src: conf.d/bitwarden.fish.j2
-    dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config/fish/conf.d/bitwarden.fish"
-    owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
-    group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    dest: "{{ ansible_env.HOME }}/.config/fish/conf.d/bitwarden.fish"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
     mode: '0644'

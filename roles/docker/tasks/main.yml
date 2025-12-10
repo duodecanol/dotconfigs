@@ -4,5 +4,21 @@
     state: present
   with_items:
     - docker.io
+    - docker-buildx
     - docker-compose-v2
   become: true
+
+# TODO: Need Testing
+- name: Docker post-installation
+  ansible.builtin.shell: |
+     sudo usermod -aG docker $USER
+     sudo systemctl status docker
+     sudo systemctl restart docker
+     sudo systemctl enable docker.service
+     sudo systemctl enable containerd.service
+  args:
+    executable: /bin/bash
+  become: true
+
+
+# TODO: config daemon.json

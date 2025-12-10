@@ -3,9 +3,9 @@ mattmc3/ez-compinit
 # you can even use Oh My Zsh plugins
 getantidote/use-omz
 ohmyzsh/ohmyzsh path:lib
-ohmyzsh/ohmyzsh path:plugins/fzf
-ohmyzsh/ohmyzsh path:plugins/git
 ohmyzsh/ohmyzsh path:plugins/brew
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/fzf
 ohmyzsh/ohmyzsh path:plugins/nvm
 ohmyzsh/ohmyzsh path:plugins/npm
 ohmyzsh/ohmyzsh path:plugins/multipass
@@ -18,6 +18,7 @@ ohmyzsh/ohmyzsh path:plugins/argocd
 ohmyzsh/ohmyzsh path:plugins/extract
 ohmyzsh/ohmyzsh path:plugins/ubuntu
 ohmyzsh/ohmyzsh path:plugins/direnv
+ohmyzsh/ohmyzsh path:plugins/eza
 
 # add fish-like features
 MichaelAquilina/zsh-you-should-use

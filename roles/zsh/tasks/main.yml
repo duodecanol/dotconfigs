@@ -19,28 +19,28 @@
   become: true
   when: ansible_os_family != 'Darwin'
   ansible.builtin.user:
-    name: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    name: "{{ ansible_env.USER }}"
     shell: /usr/bin/zsh
 
 - name: Setup default shell (MacOS)
   become: true
   when: ansible_os_family == 'Darwin'
   ansible.builtin.user:
-    name: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    name: "{{ ansible_env.USER }}"
     shell: /bin/zsh
 
 - name: Setup config dir
   ansible.builtin.file:
-    path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config"
+    path: "{{ ansible_env.HOME }}/.config"
     state: directory
-    owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
-    # group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    owner: "{{ ansible_env.USER }}"
+    # group: "{{ ansible_env.USER }}"
     mode: '0700'
 
 - name: Install Config
   ansible.builtin.synchronize:
     src: "zsh"
-    dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config/"
+    dest: "{{ ansible_env.HOME }}/.config/"
     mode: push
     delete: true
     archive: true
@@ -49,15 +49,15 @@
 - name: Copy Secret
   ansible.builtin.copy:
     src: "zsh/secrets.zsh"
-    dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.config/zsh/secrets.zsh"
-    owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
-    # group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    dest: "{{ ansible_env.HOME }}/.config/zsh/secrets.zsh"
+    owner: "{{ ansible_env.USER }}"
+    # group: "{{ ansible_env.USER }}"
     mode: '0644'
 
 - name: Copy hidden config
   ansible.builtin.copy:
     src: .zshrc
-    dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.zshrc"
-    owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
-    # group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    owner: "{{ ansible_env.USER }}"
+    # group: "{{ ansible_env.USER }}"
     mode: '0644'

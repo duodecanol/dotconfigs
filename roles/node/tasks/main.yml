@@ -1,11 +1,11 @@
 - name: Check Node Installation
   ansible.builtin.stat:
-    path: "{{ lookup('ansible.builtin.env', 'HOME') }}/.local/share/nvm/v{{ node_version }}"
+    path: "{{ ansible_env.HOME }}/.local/share/nvm/v{{ node_version }}"
   register: check_node_result
 
 # - name: Install Node
 #   ansible.builtin.command: |
-#     zsh -l -c 'source {{ lookup('ansible.builtin.env', 'HOME') }}/.config/fish/config.zsh && \
+#     zsh -l -c 'source {{ ansible_env.HOME }}/.config/fish/config.zsh && \
 #     nvm install {{ node_version }} && \
 #     nvm use {{ node_version }}'
 #   become: false

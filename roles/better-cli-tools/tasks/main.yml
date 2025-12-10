@@ -1,0 +1,10 @@
+- name: Install Tools
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+  become: false
+  with_items:
+    - eza
+    - btop
+    - broot
+    - httpie

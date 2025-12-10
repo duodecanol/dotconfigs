@@ -1,6 +1,7 @@
 - name: Setup Development Environment
-  hosts: local-machines
+  # hosts: local-machines
   # hosts: dev-debian
+  hosts: all
   # become: true
   vars:
     gui: false
@@ -13,26 +14,20 @@
       when: is_linux
     - role: setup-flatpak
       when: is_linux
-    # - setup-homebrew
+    - setup-homebrew
     - role: rust
     - role: python3
     - role: git
       when: is_linux
-    - role: opencode
+    - role: better-cli-tools
     - role: zsh
-    - role: ssh
     - role: tmux
     - role: bw
-    - role: aichat
     - role: nvim
-    # # - ansible
     - role: kubectl
     - role: docker
       when: is_linux
-    # - dotconfig
-    - role: gui-apps
-      when: gui
-    # - role: stow
+    - role: stow
   tasks:
     - name: Print message
       ansible.builtin.debug:

@@ -6,7 +6,7 @@
 - name: Copy gitconfig
   ansible.builtin.copy:
     src: .gitconfig
-    dest: "{{ lookup('ansible.builtin.env', 'HOME') }}/.gitconfig"
-    owner: "{{ lookup('ansible.builtin.env', 'USER') }}"
-    group: "{{ lookup('ansible.builtin.env', 'USER') }}"
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
     mode: "0644"

@@ -1,5 +1,5 @@
 - name: Update dependencies
-  become: "{{ lookup('ansible.builtin.env', 'USER') != 'root' }}"
+  become: "{{ ansible_env.USER != 'root' }}"
   hosts: all-debian-based
   roles:
     - apt-update
